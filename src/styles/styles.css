@@ -1,0 +1,57 @@
+.app {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: #e7ebf0;
+}
+
+.app-bar {
+  background-color: #7089a8;
+}
+
+.poll-container {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 2em 0 2em;
+}
+
+.poll-title {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 2em 0 0 0;
+}
+
+.poll-description {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.poll-group-header {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 2em 0 0 0;
+}
+
+.candidate-card {
+  margin: 0.5em 0 0 0;
+}
+
+.candidate-card-internal-no-votes {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 1em;
+}
+
+.candidate-card-internal-has-votes {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 1em;
+  background-color: #ecf9cf;
+}
+
+.candidate-card-internal-controls {
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+}

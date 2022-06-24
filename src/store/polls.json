@@ -1,0 +1,79 @@
+[
+  {
+    "id": "CP",
+    "name": "Christmas Presents",
+    "description": "Use this poll to vote on what you want for Christmas",
+    "points": 16,
+    "groups": [
+      {
+        "id": "CP-CG",
+        "name": "Computer Games",
+        "description": "Votes for Computer Games",
+        "candidates": [
+          {
+            "id": "CP-CG-1",
+            "name": "COD 4",
+            "description": "Action-heavy multiplayer FPS."
+          },
+          {
+            "id": "CP-CG-2",
+            "name": "Fortnite",
+            "description": "Popular Multiplayer FPS/Building game."
+          },
+          {
+            "id": "CP-CG-3",
+            "name": "Elden Ring",
+            "description": "Really hard open-world fantasy RPG."
+          },
+          {
+            "id": "CP-CG-4",
+            "name": "Slay the Spire",
+            "description": "Indie rogue-like deck builder."
+          },
+          {
+            "id": "CP-CG-5",
+            "name": "Mario Kart 8",
+            "description": "Family cartoony kart racer with plenty of RNG."
+          }
+        ]
+      },
+      {
+        "id": "CP-BG",
+        "name": "Board Games",
+        "description": "Votes for Board Games",
+        "candidates": [
+          {
+            "id": "CP-BG-1",
+            "name": "Wonderland Wars",
+            "description": "Fantasy push-your-luck bag-building area control game."
+          },
+          {
+            "id": "CP-BG-2",
+            "name": "FrostHaven",
+            "description": "Sequel to Gloomhaven, a co-op dungeon crawler set in a huge fantasy campaign."
+          },
+          {
+            "id": "CP-BG-3",
+            "name": "Ankh",
+            "description": "Third in the Lang series - strategic area control in an Egyptian setting."
+          },
+          {
+            "id": "CP-BG-4",
+            "name": "Ticket to Ride",
+            "description": "Draw cards and build connecting train rules.  Great gateway game since it's easy to learn."
+          },
+          {
+            "id": "CP-BG-5",
+            "name": "Tainted Grail",
+            "description": "Co-op story-driven exploration and card-based combat set in a corrupted Arthurian universe."
+          },
+          {
+            "id": "CP-BG-6",
+            "name": "Alchemist",
+            "description": "Compete to deduce the ingredients in a mysterious potion."
+          }
+        ]
+      }
+    ]
+  }
+]
