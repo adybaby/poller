@@ -23,26 +23,35 @@ const useStore = create((set, get) => ({
     return typeof existingVote == 'undefined' ? 0 : existingVote.amount;
   },
   voteForCandidate: (candidateId, amount) => {
-    console.log('voting for candidate');
-    const userId = get().currentUser.id;
+    const userId = get().getCurrentUser().id;
 
-    const newVote = {
-      candidateId: { candidateId },
-      userId: { userId },
-      amount: { amount },
-    };
-
-    const existingVote = get().votes.find(
-      vote => vote.candidateId == candidateId && vote.userId == userId
-    );
-
-    if (typeof existingVote == 'undefined') {
-      set(state => ({ votes: { ...state.votes, newVote } }));
-    } else {
+    if (amount == 0) {
       set(state => ({
-        votes: { ...state.votes.filter(vote => vote != existingVote), newVote },
+        votes: state.votes.filter(
+          vote => !(vote.candidateId == candidateId && vote.userId == userId)
+        ),
       }));
+    } else {
+      const newVote = {
+        candidateId,
+        userId,
+        amount,
+      };
+
+      const existingVote = get().votes.find(
+        vote => vote.candidateId == candidateId && vote.userId == userId
+      );
+
+      if (typeof existingVote == 'undefined') {
+        set(state => ({ votes: [...state.votes, newVote] }));
+      } else {
+        set(state => ({
+          votes: [...state.votes.filter(vote => vote != existingVote), newVote],
+        }));
+      }
     }
+
+    console.log(get().votes);
   },
 }));
 

@@ -9,10 +9,11 @@ import useStore from '../store/store';
 
 export default function VoteControl({ candidate, amount }) {
   const [votes, setVotes] = React.useState(amount);
+  const voteForCandidate = useStore(state => state.voteForCandidate);
 
   const handleChange = event => {
     setVotes(event.target.value);
-    useStore(state => state.voteForCandidate(candidate.id, event.target.value));
+    voteForCandidate(candidate.id, event.target.value);
   };
 
   return (
