@@ -5,17 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PropTypes from 'prop-types';
-import useStore from '../store/store';
 
-export default function VoteControl({ candidate, amount }) {
-  const [votes, setVotes] = React.useState(amount);
-  const voteForCandidate = useStore(state => state.voteForCandidate);
-
-  const handleChange = event => {
-    setVotes(event.target.value);
-    voteForCandidate(candidate.id, event.target.value);
-  };
-
+export default function VoteControl({ getVotes, setVotes }) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -23,9 +14,9 @@ export default function VoteControl({ candidate, amount }) {
         <Select
           labelId="vote-control-select-label"
           id="vote-control-select"
-          value={votes}
+          value={getVotes()}
           label="Votes"
-          onChange={handleChange}
+          onChange={setVotes}
         >
           <MenuItem value={0}>0</MenuItem>
           <MenuItem value={1}>1</MenuItem>
@@ -39,6 +30,6 @@ export default function VoteControl({ candidate, amount }) {
 }
 
 VoteControl.propTypes = {
-  candidate: PropTypes.any.isRequired,
-  amount: PropTypes.number.isRequired,
+  getVotes: PropTypes.any.isRequired,
+  setVotes: PropTypes.any.isRequired,
 };

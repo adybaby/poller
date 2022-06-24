@@ -35,17 +35,24 @@
   margin: 0.5em 0 0 0;
 }
 
-.candidate-card-internal-no-votes {
+.candidate-card-internal {
   display: flex;
   flex-flow: row nowrap;
   padding: 1em;
 }
 
-.candidate-card-internal-has-votes {
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 1em;
+.candidate-card-internal.one-vote {
+  background-color: #f8fded;
+}
+
+.candidate-card-internal.two-votes {
   background-color: #ecf9cf;
+}
+.candidate-card-internal.three-votes {
+  background-color: #dff5ad;
+}
+.candidate-card-internal.four-votes {
+  background-color: #cdf080;
 }
 
 .candidate-card-internal-controls {

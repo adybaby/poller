@@ -3,7 +3,6 @@
     "id": "CP",
     "name": "Christmas Presents",
     "description": "Use this poll to vote on what you want for Christmas",
-    "points": 16,
     "groups": [
       {
         "id": "CP-CG",

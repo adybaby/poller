@@ -50,8 +50,6 @@ const useStore = create((set, get) => ({
         }));
       }
     }
-
-    console.log(get().votes);
   },
 }));
 
