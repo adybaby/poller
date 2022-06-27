@@ -1,17 +1,20 @@
 [
   {
+    "pollId": "CP",
     "candidateId": "CP-CG-1",
     "userId": "1",
     "amount": 1
   },
   {
+    "pollId": "CP",
     "candidateId": "CP-CG-2",
     "userId": "1",
-    "amount": 1
+    "amount": 2
   },
   {
+    "pollId": "CP",
     "candidateId": "CP-CG-3",
     "userId": "1",
-    "amount": 1
+    "amount": 3
   }
 ]

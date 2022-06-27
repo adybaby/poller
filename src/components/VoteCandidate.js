@@ -11,12 +11,17 @@ export default function VoteCandidate({ candidate }) {
   );
 
   const voteForCandidate = useStore(state => state.voteForCandidate);
+  const setErr = useStore(store => store.setErr);
 
   const getVotes = () => amount;
 
   const setVotes = event => {
-    setAmount(event.target.value);
-    voteForCandidate(candidate.id, event.target.value);
+    try {
+      voteForCandidate(candidate.id, event.target.value);
+      setAmount(event.target.value);
+    } catch (err) {
+      setErr(err);
+    }
   };
 
   const colorClasses = [

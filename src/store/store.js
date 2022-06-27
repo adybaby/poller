@@ -11,19 +11,67 @@ const useStore = create((set, get) => ({
   polls: JSON.parse(JSON.stringify(pollsFile)),
   users: JSON.parse(JSON.stringify(usersFile)),
   votes: JSON.parse(JSON.stringify(votesFile)),
-  getCurrentUser: () => {
-    return get().users[0];
+  currentUser: undefined,
+  currentPoll: undefined,
+  pointsSpent: 0,
+  err: '',
+  setCurrentUser: userId => {
+    set(state => ({
+      currentUser: state.users.find(user => user.id == userId),
+    }));
+  },
+  setErr: err => {
+    set(() => ({ err }));
+  },
+  initPointsSpent: () => {
+    const userId = get().currentUser.id;
+    const pollId = get().currentPoll.id;
+    const pollVotes = get().votes.filter(vote => (vote.pollId = pollId));
+    const userVotes = pollVotes.filter(vote => vote.userId == userId);
+
+    const pointsSpent = userVotes.reduce(
+      (previousValue, currentValue) => previousValue + currentValue.amount ** 2,
+      0
+    );
+    set(() => ({ pointsSpent }));
+  },
+  initPoll: pollId => {
+    set(state => ({
+      currentPoll: state.polls.find(poll => poll.id == pollId),
+    }));
+    get().initPointsSpent();
   },
   getAmountVotedForCandidate: candidateId => {
-    const userId = get().getCurrentUser().id;
-
+    const userId = get().currentUser.id;
     const existingVote = get().votes.find(
       vote => vote.candidateId == candidateId && vote.userId == userId
     );
     return typeof existingVote == 'undefined' ? 0 : existingVote.amount;
   },
   voteForCandidate: (candidateId, amount) => {
-    const userId = get().getCurrentUser().id;
+    const userId = get().currentUser.id;
+
+    const existingVote = get().votes.find(
+      vote => vote.candidateId == candidateId && vote.userId == userId
+    );
+
+    var existingAmount = 0;
+
+    if (typeof existingVote != 'undefined') {
+      existingAmount = existingVote.amount;
+    }
+
+    const newTotal = get().pointsSpent - existingAmount ** 2 + amount ** 2;
+
+    if (newTotal > 16) {
+      throw (
+        'You can spend up to 16 points on votes in this poll, and this vote would take you to ' +
+        newTotal +
+        '. Reduce you votes on other candidates to vote more.'
+      );
+    }
+
+    set(() => ({ pointsSpent: newTotal }));
 
     if (amount == 0) {
       set(state => ({
@@ -37,10 +85,6 @@ const useStore = create((set, get) => ({
         userId,
         amount,
       };
-
-      const existingVote = get().votes.find(
-        vote => vote.candidateId == candidateId && vote.userId == userId
-      );
 
       if (typeof existingVote == 'undefined') {
         set(state => ({ votes: [...state.votes, newVote] }));

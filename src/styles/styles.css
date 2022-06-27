@@ -62,3 +62,23 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+.point-counter-card {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background-color: white;
+  -webkit-box-shadow: 0 8px 6px -6px rgb(125, 125, 125);
+  -moz-box-shadow: 0 8px 6px -6px rgb(125, 125, 125);
+  box-shadow: 0 8px 6px -6px rgb(125, 125, 125);
+}
+
+.point-counter-card-internal {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 1em;
+}
+
+.point-counter-card-internal.all-points-spent {
+  background-color: #ecf9cf;
+}
