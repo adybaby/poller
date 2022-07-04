@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemText,
   Divider,
+  Typography,
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
@@ -47,6 +48,9 @@ export default function UserMenu() {
         color="inherit"
       >
         <AccountCircle />
+        <Typography sx={{ margin: '0 0 0 0.3em' }} variant="button">
+          {currentUser.name}
+        </Typography>
       </IconButton>
       <Menu
         id="menu-appbar"
