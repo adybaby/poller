@@ -1,6 +1,6 @@
 .app {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row;
   background-color: #e7ebf0;
 }
 
@@ -8,10 +8,20 @@
   background-color: #7089a8;
 }
 
+.poll-menu {
+  background-color: white;
+  border-right: 1px solid lightgray;
+  min-width: 12em;
+}
+
+.user-menu-current-user-details {
+  background-color: #f3f3f3;
+}
+
 .poll-container {
   display: flex;
   flex-flow: column wrap;
-  margin: 0 2em 0 2em;
+  margin: 0 2em 20em 2em;
 }
 
 .poll-title {
@@ -64,13 +74,12 @@
 }
 
 .point-counter-card {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  bottom: 0;
   z-index: 9999;
+  width: 100%;
   background-color: white;
-  -webkit-box-shadow: 0 8px 6px -6px rgb(125, 125, 125);
-  -moz-box-shadow: 0 8px 6px -6px rgb(125, 125, 125);
-  box-shadow: 0 8px 6px -6px rgb(125, 125, 125);
+  border-top: 1px solid lightgray;
 }
 
 .point-counter-card-internal {

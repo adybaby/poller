@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "name": "Adrian",
+    "areaId": "1",
+    "skillsLevels": [
+      { "skillId": "1", "level": 1 },
+      { "skillId": "2", "level": 2 }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Alaina",
+    "areaId": "2",
+    "skillsLevels": [{ "skillId": "1", "level": 1 }]
+  },
+  {
+    "id": "3",
+    "name": "Daniella",
+    "areaId": "3",
+    "skillsLevels": [{ "skillId": "1", "level": 2 }]
+  },
+  {
+    "id": "4",
+    "name": "Brooklyn",
+    "areaId": "1",
+    "skillsLevels": [{ "skillId": "1", "level": 3 }]
+  },
+  {
+    "id": "5",
+    "name": "Ayana",
+    "areaId": "1",
+    "skillsLevels": [{ "skillId": "1", "level": 3 }]
+  },
+  {
+    "id": "6",
+    "name": "Matteo",
+    "areaId": "2",
+    "skillsLevels": [{ "skillId": "1", "level": 4 }]
+  },
+  {
+    "id": "7",
+    "name": "Reuben",
+    "areaId": "3",
+    "skillsLevels": [{ "skillId": "1", "level": 2 }]
+  },
+  {
+    "id": "8",
+    "name": "Chantelle",
+    "areaId": "3",
+    "skillsLevels": [{ "skillId": "1", "level": 2 }]
+  },
+  {
+    "id": "9",
+    "name": "Kyla",
+    "areaId": "2",
+    "skillsLevels": [{ "skillId": "1", "level": 3 }]
+  },
+  {
+    "id": "10",
+    "name": "Xavier",
+    "areaId": "1",
+    "skillsLevels": [{ "skillId": "1", "level": 1 }]
+  }
+]

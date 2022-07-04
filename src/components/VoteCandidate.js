@@ -6,14 +6,12 @@ import PropTypes from 'prop-types';
 import useStore from '../store/store';
 
 export default function VoteCandidate({ candidate }) {
-  const [amount, setAmount] = React.useState(
-    useStore(state => state.getAmountVotedForCandidate)(candidate.id)
-  );
-
   const voteForCandidate = useStore(state => state.voteForCandidate);
   const setErr = useStore(store => store.setErr);
+  const getVotes = () =>
+    useStore(state => state.getAmountVotedForCandidate)(candidate.id);
 
-  const getVotes = () => amount;
+  const [amount, setAmount] = React.useState(getVotes());
 
   const setVotes = event => {
     try {
@@ -34,7 +32,7 @@ export default function VoteCandidate({ candidate }) {
 
   return (
     <Card className="candidate-card">
-      <div className={'candidate-card-internal ' + colorClasses[amount]}>
+      <div className={'candidate-card-internal ' + colorClasses[getVotes()]}>
         <div>
           <Typography variant="h5" component="div">
             {candidate.name}
@@ -44,7 +42,7 @@ export default function VoteCandidate({ candidate }) {
           </Typography>
         </div>
         <div className="candidate-card-internal-controls">
-          <VoteControl getVotes={getVotes} setVotes={setVotes} />
+          <VoteControl amount={amount} setVotes={setVotes} />
         </div>
       </div>
     </Card>

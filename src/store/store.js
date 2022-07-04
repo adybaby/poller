@@ -1,19 +1,15 @@
 import create from 'zustand';
-import pollsFile from './polls.json';
-import areasFile from './areas.json';
-import skillsFile from './skills.json';
-import usersFile from './users.json';
-import votesFile from './votes.json';
+import * as data from './data/data';
 
 const useStore = create((set, get) => ({
-  areas: JSON.parse(JSON.stringify(areasFile)),
-  skills: JSON.parse(JSON.stringify(skillsFile)),
-  polls: JSON.parse(JSON.stringify(pollsFile)),
-  users: JSON.parse(JSON.stringify(usersFile)),
-  votes: JSON.parse(JSON.stringify(votesFile)),
+  areas: data.getAreas(),
+  skills: data.getSkills(),
+  polls: data.getPolls(),
+  users: data.getUsers(),
+  votes: data.getVotes(),
   currentUser: undefined,
   currentPoll: undefined,
-  pointsSpent: 0,
+  pointsSpent: undefined,
   err: '',
   setCurrentUser: userId => {
     set(state => ({
@@ -26,7 +22,7 @@ const useStore = create((set, get) => ({
   initPointsSpent: () => {
     const userId = get().currentUser.id;
     const pollId = get().currentPoll.id;
-    const pollVotes = get().votes.filter(vote => (vote.pollId = pollId));
+    const pollVotes = get().votes.filter(vote => vote.pollId == pollId);
     const userVotes = pollVotes.filter(vote => vote.userId == userId);
 
     const pointsSpent = userVotes.reduce(
@@ -46,6 +42,7 @@ const useStore = create((set, get) => ({
     const existingVote = get().votes.find(
       vote => vote.candidateId == candidateId && vote.userId == userId
     );
+
     return typeof existingVote == 'undefined' ? 0 : existingVote.amount;
   },
   voteForCandidate: (candidateId, amount) => {
@@ -81,6 +78,7 @@ const useStore = create((set, get) => ({
       }));
     } else {
       const newVote = {
+        pollId: get().currentPoll.id,
         candidateId,
         userId,
         amount,

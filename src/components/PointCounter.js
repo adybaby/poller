@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Button, Dialog, Alert, AlertTitle } from '@mui/material';
 import useStore from '../store/store';
 
-export default function PointsCounter() {
+export default function PointCounter() {
   const pointsSpent = useStore(state => state.pointsSpent);
   const [infoOpen, setInfoOpen] = React.useState(false);
 
@@ -20,14 +20,14 @@ export default function PointsCounter() {
             To vote on an item once costs one point. To vote on the same item
             twice costs four points. To vote on the same item three times costs
             nine points, and to vote on the same item four times costs sixteen
-            points. I.e. The cost to vote for an item costs the number of votes
-            for that item squared.
+            points. I.e. The cost to vote for an item is the number of votes for
+            that item squared.
           </p>
           <p>
-            For example, you could vote once for sixteen different items, you
-            could vote for the same item four times (and have no more points
-            left), or any other combination - so long as you don&apos;t use up
-            more than sixteen votes for the poll in total.
+            For example, with sixteen points you could vote once for sixteen
+            different items, you could vote for the same item four times, or any
+            other combination - so long as you don&apos;t use up more than
+            sixteen votes for the poll in total.
           </p>
         </Alert>
       </Dialog>
@@ -57,10 +57,13 @@ export default function PointsCounter() {
                 ' more point' +
                 (16 - pointsSpent > 1 ? 's' : '') +
                 ' on this poll.'}
-            <Button variant="text" onClick={() => setInfoOpen(true)}>
+          </Typography>
+          <div>
+            <Button variant="outlined" onClick={() => setInfoOpen(true)}>
               HOW DO POINTS WORK?
             </Button>
-          </Typography>
+            <div></div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,10 +1,12 @@
 import React from 'react';
 import './styles/styles.css';
-import Poll from './components/Poll';
+
 import AppBar from './components/AppBar';
 import { CssBaseline } from '@mui/material';
 import useStore from './store/store';
 import ErrorDialog from './components/ErrorDialog';
+import PollMenu from './components/PollsMenu';
+import PollTabBar from './components/PollTabBar';
 
 function App() {
   const setCurrentUser = useStore(state => state.setCurrentUser);
@@ -15,10 +17,10 @@ function App() {
     <React.Fragment>
       <ErrorDialog />
       <CssBaseline />
-
       <AppBar />
       <div className="app">
-        <Poll pollId="CP" />
+        <PollMenu />
+        <PollTabBar />
       </div>
     </React.Fragment>
   );

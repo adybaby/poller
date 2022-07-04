@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PropTypes from 'prop-types';
 
-export default function VoteControl({ getVotes, setVotes }) {
+export default function VoteControl({ amount, setVotes }) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -14,7 +14,7 @@ export default function VoteControl({ getVotes, setVotes }) {
         <Select
           labelId="vote-control-select-label"
           id="vote-control-select"
-          value={getVotes()}
+          value={amount}
           label="Votes"
           onChange={setVotes}
         >
@@ -30,6 +30,6 @@ export default function VoteControl({ getVotes, setVotes }) {
 }
 
 VoteControl.propTypes = {
-  getVotes: PropTypes.any.isRequired,
+  amount: PropTypes.number.isRequired,
   setVotes: PropTypes.any.isRequired,
 };
