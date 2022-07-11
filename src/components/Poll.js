@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useStore from '../store/store';
 import Typography from '@mui/material/Typography';
 import VoteCandidate from './VoteCandidate';
@@ -6,9 +6,7 @@ import PointCounter from './PointCounter';
 
 export default function Poll() {
   const currentPoll = useStore(state => state.currentPoll);
-  const currentUser = useStore(state => state.currentUser);
-
-  useEffect(() => {}, [currentUser]);
+  var voteIndex = 0;
 
   return (
     <div>
@@ -27,7 +25,11 @@ export default function Poll() {
           <div className="poll-group-header" key={group.id}>
             <Typography variant="h4">{group.name}</Typography>
             {group.candidates.map(candidate => (
-              <VoteCandidate key={candidate.id} candidate={candidate} />
+              <VoteCandidate
+                key={candidate.id}
+                candidate={candidate}
+                voteIndex={voteIndex++}
+              />
             ))}
           </div>
         ))}

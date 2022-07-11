@@ -5,18 +5,14 @@ import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import useStore from '../store/store';
 
-export default function VoteCandidate({ candidate }) {
+export default function VoteCandidate({ candidate, voteIndex }) {
   const voteForCandidate = useStore(state => state.voteForCandidate);
   const setErr = useStore(store => store.setErr);
-  const getVotes = () =>
-    useStore(state => state.getAmountVotedForCandidate)(candidate.id);
-
-  const [amount, setAmount] = React.useState(getVotes());
+  const currentVotes = useStore(state => state.currentVotes);
 
   const setVotes = event => {
     try {
-      voteForCandidate(candidate.id, event.target.value);
-      setAmount(event.target.value);
+      voteForCandidate(voteIndex, candidate.id, event.target.value);
     } catch (err) {
       setErr(err);
     }
@@ -32,7 +28,11 @@ export default function VoteCandidate({ candidate }) {
 
   return (
     <Card className="candidate-card">
-      <div className={'candidate-card-internal ' + colorClasses[getVotes()]}>
+      <div
+        className={
+          'candidate-card-internal ' + colorClasses[currentVotes[voteIndex]]
+        }
+      >
         <div>
           <Typography variant="h5" component="div">
             {candidate.name}
@@ -42,7 +42,7 @@ export default function VoteCandidate({ candidate }) {
           </Typography>
         </div>
         <div className="candidate-card-internal-controls">
-          <VoteControl amount={amount} setVotes={setVotes} />
+          <VoteControl amount={currentVotes[voteIndex]} setVotes={setVotes} />
         </div>
       </div>
     </Card>
@@ -51,4 +51,5 @@ export default function VoteCandidate({ candidate }) {
 
 VoteCandidate.propTypes = {
   candidate: PropTypes.any.isRequired,
+  voteIndex: PropTypes.number.isRequired,
 };

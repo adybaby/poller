@@ -9,6 +9,7 @@ const useStore = create((set, get) => ({
   votes: data.getVotes(),
   currentUser: undefined,
   currentPoll: undefined,
+  currentVotes: undefined,
   pointsSpent: undefined,
   err: '',
   setCurrentUser: userId => {
@@ -19,45 +20,39 @@ const useStore = create((set, get) => ({
   setErr: err => {
     set(() => ({ err }));
   },
-  initPointsSpent: () => {
-    const userId = get().currentUser.id;
-    const pollId = get().currentPoll.id;
-    const pollVotes = get().votes.filter(vote => vote.pollId == pollId);
-    const userVotes = pollVotes.filter(vote => vote.userId == userId);
-
-    const pointsSpent = userVotes.reduce(
-      (previousValue, currentValue) => previousValue + currentValue.amount ** 2,
-      0
-    );
-    set(() => ({ pointsSpent }));
-  },
-  initPoll: pollId => {
-    set(state => ({
-      currentPoll: state.polls.find(poll => poll.id == pollId),
-    }));
-    get().initPointsSpent();
-  },
-  getAmountVotedForCandidate: candidateId => {
-    const userId = get().currentUser.id;
+  getAmountVotedForCandidate: (userId, candidateId) => {
     const existingVote = get().votes.find(
       vote => vote.candidateId == candidateId && vote.userId == userId
     );
 
     return typeof existingVote == 'undefined' ? 0 : existingVote.amount;
   },
-  voteForCandidate: (candidateId, amount) => {
+  initPoll: pollId => {
     const userId = get().currentUser.id;
+    var currentPoll;
 
-    const existingVote = get().votes.find(
-      vote => vote.candidateId == candidateId && vote.userId == userId
-    );
-
-    var existingAmount = 0;
-
-    if (typeof existingVote != 'undefined') {
-      existingAmount = existingVote.amount;
+    if (typeof pollId == 'undefined') {
+      currentPoll = get().polls[0];
+    } else {
+      currentPoll = get().polls.find(poll => poll.id == pollId);
     }
 
+    const currentVotes = [];
+    var pointsSpent = 0;
+
+    currentPoll.groups.forEach(group => {
+      group.candidates.forEach(candidate => {
+        const votes = get().getAmountVotedForCandidate(userId, candidate.id);
+        currentVotes.push(votes);
+        pointsSpent += votes ** 2;
+      });
+    });
+
+    set(() => ({ currentPoll, currentVotes, pointsSpent }));
+  },
+  voteForCandidate: (voteIndex, candidateId, amount) => {
+    const userId = get().currentUser.id;
+    var existingAmount = get().currentVotes[voteIndex];
     const newTotal = get().pointsSpent - existingAmount ** 2 + amount ** 2;
 
     if (newTotal > 16) {
@@ -68,6 +63,10 @@ const useStore = create((set, get) => ({
       );
     }
 
+    const newCurrentVotes = [...get().currentVotes];
+    newCurrentVotes[voteIndex] = amount;
+
+    set(() => ({ currentVotes: newCurrentVotes }));
     set(() => ({ pointsSpent: newTotal }));
 
     if (amount == 0) {
@@ -83,6 +82,10 @@ const useStore = create((set, get) => ({
         userId,
         amount,
       };
+
+      const existingVote = get().votes.find(
+        vote => vote.userId == userId && vote.candidateId == candidateId
+      );
 
       if (typeof existingVote == 'undefined') {
         set(state => ({ votes: [...state.votes, newVote] }));
