@@ -2,7 +2,6 @@ import React from 'react';
 import './styles/styles.css';
 
 import AppBar from './components/AppBar';
-import { CssBaseline } from '@mui/material';
 import useStore from './store/store';
 import ErrorDialog from './components/ErrorDialog';
 import PollMenu from './components/PollsMenu';
@@ -16,7 +15,6 @@ function App() {
   return (
     <React.Fragment>
       <ErrorDialog />
-      <CssBaseline />
       <AppBar />
       <div className="app">
         <PollMenu />

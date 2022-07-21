@@ -87,18 +87,19 @@ export default function UserMenu() {
                 }
               />
             </ListItem>
-            {currentUser.skillsLevels.map(skill => (
-              <ListItem key={skill.skillId}>
-                <ListItemText
-                  primary={
-                    'Skill: ' +
-                    skills.find(skillRef => skillRef.id == skill.skillId).name +
-                    ' at Lvl ' +
-                    skill.level
-                  }
-                />
-              </ListItem>
-            ))}
+
+            <ListItem key={currentUser.skillId}>
+              <ListItemText
+                primary={
+                  'Skill: ' +
+                  skills.find(skillRef => skillRef.id == currentUser.skillId)
+                    .name +
+                  ' (Lvl ' +
+                  currentUser.skillLevel +
+                  ')'
+                }
+              />
+            </ListItem>
           </div>
           <Divider />
           <ListItem>

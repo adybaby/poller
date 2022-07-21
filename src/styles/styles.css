@@ -91,3 +91,7 @@
 .point-counter-card-internal.all-points-spent {
   background-color: #ecf9cf;
 }
+
+.chart-container {
+  height: 100vh;
+}

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import Poll from './Poll';
-import PollCharts from './PollCharts';
+import PollChart from './PollChart';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,7 +42,7 @@ export default function PollTabBar() {
           <Tab label="CHARTS" />
         </Tabs>
       </Box>
-      {tabIndex == 0 ? <Poll /> : <PollCharts />}
+      {tabIndex == 0 ? <Poll /> : <PollChart />}
     </Box>
   );
 }
