@@ -1,5 +1,6 @@
 [
   { "id": "1", "name": "First Person Shooters" },
   { "id": "2", "name": "Strategy Computer Games" },
-  { "id": "3", "name": "Tactical Board Games" }
+  { "id": "3", "name": "Tactical Board Games" },
+  { "id": "4", "name": "Illustration" }
 ]

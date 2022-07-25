@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import {
   Divider,
   List,
@@ -6,16 +6,22 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
-import useStore from '../store/store';
+import useStore from '../../store/store';
 
 export default function PollMenu() {
   const polls = useStore(state => state.polls);
   const initPoll = useStore(state => state.initPoll);
+  const currentUser = useStore(state => state.currentUser);
   const currentPoll = useStore(state => state.currentPoll);
 
-  if (typeof currentPoll == 'undefined') {
-    initPoll(polls[0].id);
-  }
+  useEffect(() => {
+    if (
+      typeof currentUser != 'undefined' &&
+      typeof currentPoll == 'undefined'
+    ) {
+      initPoll(polls[0].id);
+    }
+  }, [currentUser, currentPoll]);
 
   return (
     <div className="poll-menu">

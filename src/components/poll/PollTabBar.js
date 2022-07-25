@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import Poll from './Poll';
-import PollChart from './PollChart';
+import PollChart from './chart/PollChart';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles/styles.css';
 
 import AppBar from './components/AppBar';
 import useStore from './store/store';
 import ErrorDialog from './components/ErrorDialog';
-import PollMenu from './components/PollsMenu';
-import PollTabBar from './components/PollTabBar';
+import PollMenu from './components/poll/PollsMenu';
+import PollTabBar from './components/poll/PollTabBar';
 
 function App() {
   const setCurrentUser = useStore(state => state.setCurrentUser);
   const users = useStore(state => state.users);
-  setCurrentUser(users[0].id);
+
+  useEffect(() => {
+    setCurrentUser(users[0].id);
+  }, []);
 
   return (
     <React.Fragment>

@@ -5,7 +5,7 @@ const useStore = create((set, get) => ({
   areas: data.getAreas(),
   skills: data.getSkills(),
   polls: data.getPolls(),
-  users: data.getUsers(),
+  users: data.getUsers().sort((a, b) => a.name.localeCompare(b.name)),
   votes: data.getVotes(),
   currentUser: undefined,
   currentPoll: undefined,
@@ -16,6 +16,25 @@ const useStore = create((set, get) => ({
     set(state => ({
       currentUser: state.users.find(user => user.id == userId),
     }));
+  },
+  updateCurrentUserField: (field, value) => {
+    const updatedUser = { ...get().currentUser, [field]: value };
+    set(state => ({
+      users: [
+        ...state.users.filter(user => user.id != get().currentUser.id),
+        updatedUser,
+      ].sort((a, b) => a.name.localeCompare(b.name)),
+    }));
+    set(() => ({ currentUser: updatedUser }));
+  },
+  setCurrentUserSkillId: skillId => {
+    get().updateCurrentUserField('skillId', skillId);
+  },
+  setCurrentUserSkillLevel: skillLevel => {
+    get().updateCurrentUserField('skillLevel', skillLevel);
+  },
+  setCurrentUserAreaId: areaId => {
+    get().updateCurrentUserField('areaId', areaId);
   },
   setErr: err => {
     set(() => ({ err }));
@@ -28,6 +47,7 @@ const useStore = create((set, get) => ({
     return typeof existingVote == 'undefined' ? 0 : existingVote.amount;
   },
   initPoll: pollId => {
+    if (typeof get().currentUser == 'undefined') return;
     const userId = get().currentUser.id;
     var currentPoll;
 

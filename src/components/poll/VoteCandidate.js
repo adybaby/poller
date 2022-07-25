@@ -3,9 +3,9 @@ import Card from '@mui/material/Card';
 import VoteControl from './VoteControl';
 import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import useStore from '../store/store';
+import useStore from '../../store/store';
 
-export default function VoteCandidate({ candidate, voteIndex }) {
+export default function VoteCandidate({ candidate, voteIndex, disabled }) {
   const voteForCandidate = useStore(state => state.voteForCandidate);
   const setErr = useStore(store => store.setErr);
   const currentVotes = useStore(state => state.currentVotes);
@@ -42,7 +42,11 @@ export default function VoteCandidate({ candidate, voteIndex }) {
           </Typography>
         </div>
         <div className="candidate-card-internal-controls">
-          <VoteControl amount={currentVotes[voteIndex]} setVotes={setVotes} />
+          <VoteControl
+            amount={currentVotes[voteIndex]}
+            setVotes={setVotes}
+            disabled={disabled}
+          />
         </div>
       </div>
     </Card>
@@ -52,4 +56,5 @@ export default function VoteCandidate({ candidate, voteIndex }) {
 VoteCandidate.propTypes = {
   candidate: PropTypes.any.isRequired,
   voteIndex: PropTypes.number.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };

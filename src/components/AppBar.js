@@ -3,7 +3,7 @@ import { AppBar as MUIAppBar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import UserMenu from './UserMenu';
+import UserMenu from './user/UserMenu';
 
 export default function AppBar() {
   return (

@@ -68,5 +68,12 @@
     "areaId": "3",
     "skillId": "3",
     "skillLevel": 1
+  },
+  {
+    "id": "11",
+    "name": "Ricky",
+    "areaId": "2",
+    "skillId": "4",
+    "skillLevel": 4
   }
 ]

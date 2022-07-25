@@ -1,7 +1,9 @@
 import React from 'react';
-import useStore from '../store/store';
+import useStore from '../../store/store';
+import EditUserDialog from './EditUserDialog';
 import {
   IconButton,
+  Button,
   Menu,
   MenuItem,
   List,
@@ -22,6 +24,7 @@ export default function UserMenu() {
   const initPoll = useStore(state => state.initPoll);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [showEditUserDialog, setShowEditUserDialog] = React.useState(false);
 
   const selectUser = userId => {
     setCurrentUser(userId);
@@ -37,8 +40,19 @@ export default function UserMenu() {
     setAnchorEl(null);
   };
 
-  return (
+  const handleUserEditMenuClick = () => {
+    handleClose();
+    setShowEditUserDialog(true);
+  };
+
+  return typeof currentUser == 'undefined' ? (
+    <div>Loading..</div>
+  ) : (
     <div>
+      <EditUserDialog
+        open={showEditUserDialog}
+        setOpen={setShowEditUserDialog}
+      />
       <IconButton
         size="large"
         aria-label="account of current user"
@@ -74,31 +88,50 @@ export default function UserMenu() {
               primary="Current User"
             />
           </ListItem>
+
           <Divider />
+
           <div className="user-menu-current-user-details">
             <ListItem>
               <ListItemText primary={'Name: ' + currentUser.name} />
             </ListItem>
+
             <ListItem>
               <ListItemText
                 primary={
                   'Area: ' +
-                  areas.find(areaRef => areaRef.id == currentUser.areaId).name
+                  (typeof currentUser.areaId == 'undefined'
+                    ? 'No area selected'
+                    : areas.find(areaRef => areaRef.id == currentUser.areaId)
+                        .name)
                 }
               />
             </ListItem>
 
-            <ListItem key={currentUser.skillId}>
+            <ListItem>
               <ListItemText
                 primary={
                   'Skill: ' +
-                  skills.find(skillRef => skillRef.id == currentUser.skillId)
-                    .name +
-                  ' (Lvl ' +
-                  currentUser.skillLevel +
-                  ')'
+                  (typeof currentUser.skillId == 'undefined'
+                    ? 'No skill selected'
+                    : skills.find(
+                        skillRef => skillRef.id == currentUser.skillId
+                      ).name +
+                      ' (Lvl ' +
+                      currentUser.skillLevel +
+                      ')')
                 }
               />
+            </ListItem>
+
+            <ListItem>
+              <Button
+                sx={{ minHeight: 0, minWidth: 0, padding: 0 }}
+                variant="text"
+                onClick={handleUserEditMenuClick}
+              >
+                EDIT
+              </Button>
             </ListItem>
           </div>
           <Divider />

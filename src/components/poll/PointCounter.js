@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Button, Dialog, Alert, AlertTitle } from '@mui/material';
-import useStore from '../store/store';
+import useStore from '../../store/store';
 
 export default function PointCounter() {
   const pointsSpent = useStore(state => state.pointsSpent);

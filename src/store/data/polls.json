@@ -3,6 +3,7 @@
     "id": "CP",
     "name": "Christmas Presents",
     "description": "Use this poll to vote on what you want for Christmas",
+    "requiredSkills": ["1", "2", "3"],
     "groups": [
       {
         "id": "CP-CG",
@@ -79,6 +80,7 @@
     "id": "BP",
     "name": "Birthday Presents",
     "description": "Use this poll to vote on what you want for you birthday",
+    "requiredSkills": [],
     "groups": [
       {
         "id": "BP-CG",
