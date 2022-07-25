@@ -21,29 +21,33 @@ export default function Poll() {
     }
   }, [currentUser, currentPoll]);
 
-  const notAllowedMessage = () =>
-    currentPoll.requiredSkills.length == 1
-      ? 'You need to have the ' +
-        skills.find(skill => skill.id == currentPoll.requiredSkills[0]).name +
-        ' skill to vote in this poll.'
-      : 'You need to have one of the following skills to vote in this poll: ' +
-        currentPoll.requiredSkills
-          .map(skillId => skills.find(skill => skill.id == skillId).name)
-          .join(', ') +
-        '. ';
-
   return typeof currentPoll == 'undefined' ? (
     <div>Loading..</div>
   ) : (
     <div>
-      {!allowedToVote ? (
-        <div className="not-allowed-to-vote-banner">
-          <Typography variant="h4">You can&apos;t vote in this poll</Typography>
+      {currentPoll.requiredSkills.length == 0 ? null : (
+        <div className="vote-restrictions-banner">
+          <Typography variant="h4">
+            {allowedToVote
+              ? 'This vote is restricted'
+              : 'You cannot vote in this poll'}
+          </Typography>
           <Typography sx={{ marginTop: 1 }} variant="h6">
-            {notAllowedMessage()}
+            {currentPoll.requiredSkills.length == 1
+              ? 'You need to have the ' +
+                skills.find(skill => skill.id == currentPoll.requiredSkills[0])
+                  .name +
+                ' skill to vote in this poll.'
+              : 'You need to have one of the following skills to vote in this poll: ' +
+                currentPoll.requiredSkills
+                  .map(
+                    skillId => skills.find(skill => skill.id == skillId).name
+                  )
+                  .join(', ') +
+                '. '}
           </Typography>
         </div>
-      ) : null}
+      )}
       <div className="poll-container">
         <div className="poll-title">
           <Typography variant="h3" key={currentPoll.id}>

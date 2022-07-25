@@ -24,7 +24,7 @@
   margin: 0 2em 20em 2em;
 }
 
-.not-allowed-to-vote-banner {
+.vote-restrictions-banner {
   display: flex;
   flex-flow: column wrap;
   padding: 2em;
