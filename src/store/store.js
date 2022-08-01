@@ -116,6 +116,17 @@ const useStore = create((set, get) => ({
       }
     }
   },
+  deleteUserCurrentUserVotesForPolls: polls => {
+    const userId = get().currentUser.id;
+    const newVotes = get().votes.filter(vote => {
+      if (vote.userId != userId) {
+        return true;
+      }
+      return !polls.map(p => p.id).includes(vote.pollId);
+    });
+    set(() => ({ votes: newVotes }));
+    get().initPoll(get().currentPoll.id);
+  },
 }));
 
 export default useStore;
